@@ -33,8 +33,8 @@ logger.addHandler(console_handler)
 logger.info("Starting script...")
 
 #Calling and running another python file from directory
-def run_py_file(appname):
-    call(["python", appname])
+def run_py_file(filename):
+    call(["python", f"Scripts/{filename}"])
 
 #Creating dataframe from provided excel spreadsheet
 def read_items(exceldirectory: str) -> pd.core.frame.DataFrame:
@@ -88,9 +88,9 @@ def saving_to_csv(results: list,csvdirectory: str):
 
 def main():
     #Directories
-    current_directory = os.getcwd()
     c = datetime.datetime.now()
     currenttime = c.strftime('%Y-%m-%d %H.%M.%S')
+    current_directory = os.getcwd()
     current_directory = current_directory.replace("scripts", "")
     Excelfile_directory = os.path.join(current_directory, "Main Spreadsheet.xlsm")
     Csvout_directory = os.path.join(current_directory, "Data", f"price_{currenttime}.csv")
@@ -103,12 +103,10 @@ def main():
     CsID = AppID.CSGO
 
     #executing functions
+    run_py_file(sorting_logs_prices)
     df = read_items(Excelfile_directory)
     results = organizing_data(df, market, CsID)
     saving_to_csv(results,Csvout_directory)
-    run_py_file(sorting_logs_prices)
-
-    logger.info("Cvs file saved.")
 
 if __name__ == "__main__":
     main()
