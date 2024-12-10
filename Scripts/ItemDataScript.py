@@ -1,3 +1,4 @@
+from steam_community_market import Market, AppID
 import pandas as pd
 from urllib.parse import quote
 import os
@@ -61,7 +62,7 @@ def read_items(exceldirectory: str) -> pd.core.frame.DataFrame:
         exit(1)
 
 #fetching price for an item
-def fetch_price(apikey: str, itemname: str,retries: int=3,delay: int=2) -> list[str, str]:
+def fetch_price2(apikey: str, itemname: str,retries: int=3,delay: int=2) -> list[str, str]:
     itemname_encoded = quote(str(itemname))
     url = f"http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name={itemname_encoded}&key={apikey}"
     logger.info(f"Checking price for item: {itemname} (Encoded: {itemname_encoded})")
@@ -82,13 +83,33 @@ def fetch_price(apikey: str, itemname: str,retries: int=3,delay: int=2) -> list[
         time.sleep(delay)
     return ['Error', 'Error']
 
+def fetch_price(market, GameID, itemname):
+    retries = 3
+    logger.info(f"Checking price for item: {itemname}")
+    for attempt in range(retries):
+        try:
+            result = market.get_overview(itemname,GameID)
+            if result["success"] == True:
+                prices = [result.get("lowest_price", "Price not available"),
+                          result.get("median_price", "Price not available"),
+                          result.get("volume", "Volume not available")]
+                logger.info((f"Price check successful for item: {itemname}. Prices: {prices}"))
+                return prices
+            else:
+                logger.warning(f"Attempt {attempt + 1}: Failed to fetch price for item {itemname}.")
+        except Exception as e:
+            logger.error(f"Attempt {attempt + 1}: Error fetching price for item {itemname}. Error: {e}")
+    return ["Error","Error","Error"]
+
 #Getting and organizing data with the help of fetch_price function    
-def organizing_data(df: pd,apikey: str) -> list[dict[str,str]]:
+def organizing_data(df: pd) -> list[dict[str,str]]:
     results = []
+    market = Market("USD")
+    CsID = AppID.CSGO
     for _, row in df.iterrows():
         itemname = row['Full Name']
         logger.info(f"Processing item: {itemname}")
-        price = fetch_price(apikey, itemname)
+        price = fetch_price(market, CsID, itemname)
         results.append({'Actual Name': itemname, 'Lowest Price': price[0], 'Median Price': price[1]})
     logger.info(f"Total processed items: {len(results)}")
     return results
@@ -109,10 +130,10 @@ def main():
     current_directory = current_directory.replace("scripts", "")
     Excelfile_directory = os.path.join(current_directory, "Main Spreadsheet.xlsm")
     Csvout_directory = os.path.join(current_directory, "Data", f"price_{currenttime}.csv")
-    
-    apikey = read_apikey(Excelfile_directory)
+
+    #apikey = read_apikey(Excelfile_directory)
     df = read_items(Excelfile_directory)
-    results = organizing_data(df, apikey)
+    results = organizing_data(df)
     saving_to_csv(results,Csvout_directory)
 
     logger.info("Cvs file saved.")
