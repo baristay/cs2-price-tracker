@@ -1,5 +1,6 @@
 from steam_community_market import Market, AppID
 import pandas as pd
+from subprocess import call
 import os
 import logging
 import time
@@ -30,6 +31,10 @@ console_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(console_handler)
 logger.info("Starting script...")
+
+#Calling and running another python file from directory
+def run_py_file(appname):
+    call(["python", appname])
 
 #Creating dataframe from provided excel spreadsheet
 def read_items(exceldirectory: str) -> pd.core.frame.DataFrame:
@@ -90,6 +95,9 @@ def main():
     Excelfile_directory = os.path.join(current_directory, "Main Spreadsheet.xlsm")
     Csvout_directory = os.path.join(current_directory, "Data", f"price_{currenttime}.csv")
 
+    #Script names
+    sorting_logs_prices = "Sorting_Logs_Prices.py"
+
     #Currency and Game ID
     market = Market("USD")
     CsID = AppID.CSGO
@@ -98,6 +106,7 @@ def main():
     df = read_items(Excelfile_directory)
     results = organizing_data(df, market, CsID)
     saving_to_csv(results,Csvout_directory)
+    run_py_file(sorting_logs_prices)
 
     logger.info("Cvs file saved.")
 
