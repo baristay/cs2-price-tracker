@@ -1,9 +1,7 @@
 from steam_community_market import Market, AppID
 import pandas as pd
-from urllib.parse import quote
 import os
 import logging
-import requests
 import time
 import datetime
 
@@ -31,24 +29,7 @@ console_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
 logger.addHandler(console_handler)
-    
 logger.info("Starting script...")
-
-#Getting apiKey from provided excel spreadsheet
-def read_apikey(exceldirectory: str) -> str:
-    try:
-        df_welcome_page = pd.read_excel(exceldirectory, sheet_name='Welcome Page', header=None)
-        apikey = df_welcome_page.iloc[20, 3]
-        if pd.isna(apikey) or not apikey:
-            raise ValueError("API key is empty or invalid.")
-        logger.info(f"API key successfully retrieved.")
-        return apikey
-    except ValueError as e:
-        logger.error(f"Error: {e}")
-        exit(1)
-    except Exception as e:
-        logger.error(f"Unexpected error while reading API key: {e}")
-        exit(1)
 
 #Creating dataframe from provided excel spreadsheet
 def read_items(exceldirectory: str) -> pd.core.frame.DataFrame:
@@ -61,29 +42,8 @@ def read_items(exceldirectory: str) -> pd.core.frame.DataFrame:
         logger.error(f"Error while reading Main Data sheet: {e}")
         exit(1)
 
-#fetching price for an item
-def fetch_price2(apikey: str, itemname: str,retries: int=3,delay: int=2) -> list[str, str]:
-    itemname_encoded = quote(str(itemname))
-    url = f"http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name={itemname_encoded}&key={apikey}"
-    logger.info(f"Checking price for item: {itemname} (Encoded: {itemname_encoded})")
-    #Retrying for the range of "retries"
-    for attempt in range(retries):
-        try:
-            response = requests.get(url)
-            if response.status_code == 200:
-                data = response.json()
-                prices = [data.get('lowest_price', "Price not available"),
-                          data.get('median_price', "Price not available")]
-                logger.info(f"Price check successful for item: {itemname}. Prices: {prices}")
-                return prices
-            else:
-                logger.warning(f"Attempt {attempt + 1}: Failed to fetch price for item {itemname}. HTTP Status: {response.status_code}")
-        except Exception as e:
-            logger.error(f"Attempt {attempt + 1}: Error fetching price for item {itemname}. Error: {e}")
-        time.sleep(delay)
-    return ['Error', 'Error']
-
-def fetch_price(market, GameID, itemname):
+#Fetching price for an item
+def fetch_price(market, GameID, itemname: str,retries: int=2 ,delay: int=2) -> list[str, str, str]:
     retries = 3
     logger.info(f"Checking price for item: {itemname}")
     for attempt in range(retries):
@@ -99,13 +59,12 @@ def fetch_price(market, GameID, itemname):
                 logger.warning(f"Attempt {attempt + 1}: Failed to fetch price for item {itemname}.")
         except Exception as e:
             logger.error(f"Attempt {attempt + 1}: Error fetching price for item {itemname}. Error: {e}")
+        time.sleep(delay)
     return ["Error","Error","Error"]
 
 #Getting and organizing data with the help of fetch_price function    
-def organizing_data(df: pd) -> list[dict[str,str]]:
+def organizing_data(df: pd, market, CsID) -> list[dict[str,str]]:
     results = []
-    market = Market("USD")
-    CsID = AppID.CSGO
     for _, row in df.iterrows():
         itemname = row['Full Name']
         logger.info(f"Processing item: {itemname}")
@@ -131,9 +90,13 @@ def main():
     Excelfile_directory = os.path.join(current_directory, "Main Spreadsheet.xlsm")
     Csvout_directory = os.path.join(current_directory, "Data", f"price_{currenttime}.csv")
 
-    #apikey = read_apikey(Excelfile_directory)
+    #Currency and Game ID
+    market = Market("USD")
+    CsID = AppID.CSGO
+
+    #executing functions
     df = read_items(Excelfile_directory)
-    results = organizing_data(df)
+    results = organizing_data(df, market, CsID)
     saving_to_csv(results,Csvout_directory)
 
     logger.info("Cvs file saved.")
