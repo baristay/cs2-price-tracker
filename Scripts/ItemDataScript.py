@@ -69,7 +69,7 @@ def organizing_data(df: pd, market, CsID) -> list[dict[str,str]]:
         itemname = row['Full Name']
         logger.info(f"Processing item: {itemname}")
         price = fetch_price(market, CsID, itemname)
-        results.append({'Actual Name': itemname, 'Lowest Price': price[0], 'Median Price': price[1]})
+        results.append({'Actual Name': itemname, 'Lowest Price': price[0], 'Median Price': price[1], 'Volume': price[2]})
     logger.info(f"Total processed items: {len(results)}")
     return results
 
