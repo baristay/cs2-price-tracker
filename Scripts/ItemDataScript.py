@@ -36,8 +36,22 @@ logger.info("Starting script...")
 def run_py_file(filename):
     call(["python", f"Scripts/{filename}"])
 
+#Getting currency from provided excel spreadsheet
+def get_currency(exceldirectory: str) -> str:
+    try:
+        logger.info("Reading Currency.")
+        df = pd.read_excel(exceldirectory, "Welcome Page")
+        if df.iat[16,6] == None:
+            logger.info(f"Currency successfully read. Currency: {"USD"}")
+            return "USD"
+        logger.info(f"Currency successfully read. Currency: {df.iat[16,6]}")
+        return df.iat[16,6] 
+    except Exception as e:
+        logger.error(f"Error while reading Main Data sheet: {e}")
+        exit(1)
+
 #Creating dataframe from provided excel spreadsheet
-def read_items(exceldirectory: str) -> pd.core.frame.DataFrame:
+def read_items(exceldirectory: str) -> pd.DataFrame:
     try:
         logger.info("Reading Main Data sheet.")
         df = pd.read_excel(exceldirectory, sheet_name='Main Data')
@@ -81,7 +95,7 @@ def organizing_data(df: pd, market, CsID) -> list[dict[str,str]]:
 #saving result to provided csv directory
 def saving_to_csv(results: list,csvdirectory: str):
     try:
-        pd.DataFrame(results).to_csv(csvdirectory, index=False)
+        pd.DataFrame(results).to_csv(csvdirectory, index=False, encoding='utf-8-sig')
         logger.info("Results saved successfully.")
     except Exception as e:
         logger.error(f"Failed to save results: {e}")
@@ -99,7 +113,8 @@ def main():
     sorting_logs_prices = "Sorting_Logs_Prices.py"
 
     #Currency and Game ID
-    market = Market("USD")
+    currency = get_currency(Excelfile_directory)
+    market = Market(currency)
     CsID = AppID.CSGO
 
     #executing functions
