@@ -8,7 +8,6 @@ logdir = os.path.join(currentdir, "Logs")
 loglist = os.listdir(logdir)
 loglist.sort
 logdir = os.path.join(logdir, loglist[-1])
-print(logdir)
 
 logger = logging.getLogger('my_logger')
 logger.setLevel(logging.INFO)
