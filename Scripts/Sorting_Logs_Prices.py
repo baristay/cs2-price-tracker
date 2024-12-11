@@ -1,22 +1,21 @@
 import os
 import logging
-import datetime
 
 #Log Settings
 currentdir = os.getcwd()
 currentdir = currentdir.replace("Scripts", "")
-
-c = datetime.datetime.now()
-currenttime = c.strftime('%Y-%m-%d %H.%M.%S')
-
-logdir = os.path.join(currentdir, "Logs", f"ItemDataLog_{currenttime}.log")
+logdir = os.path.join(currentdir, "Logs")
+loglist = os.listdir(logdir)
+loglist.sort
+logdir = os.path.join(logdir, loglist[-1])
+print(logdir)
 
 logger = logging.getLogger('my_logger')
 logger.setLevel(logging.INFO)
 
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
-file_handler = logging.FileHandler(logdir, encoding='utf-8')
+file_handler = logging.FileHandler(logdir, mode="a",encoding='utf-8')
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(formatter)
 
@@ -27,6 +26,7 @@ console_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(console_handler)
 logger.info("Starting Sorting_Logs_Prices.py Script...")
+
 
 def deleting_excess(list: list,directory: str,directoryname: str,excessCount: int=5):
     logger.info(f"Checking directory count for: {directoryname}.")

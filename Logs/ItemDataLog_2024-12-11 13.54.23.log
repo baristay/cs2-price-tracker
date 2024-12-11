@@ -1,0 +1,48 @@
+2024-12-11 13:54:23,430 - INFO - Starting script...
+2024-12-11 13:54:23,431 - INFO - Reading Currency.
+2024-12-11 13:54:23,733 - INFO - Currency successfully read. Currency: EUR
+2024-12-11 13:54:23,804 - INFO - Starting sorting script...
+2024-12-11 13:54:23,805 - INFO - Checking directory count for: Logs.
+2024-12-11 13:54:23,805 - INFO - File count from directory is less than provided exessCount. Exess count: 5, File count: 1
+2024-12-11 13:54:23,805 - INFO - Checking directory count for: Data.
+2024-12-11 13:54:23,806 - INFO - File count from directory is less than provided exessCount. Exess count: 5, File count: 0
+2024-12-11 13:54:23,814 - INFO - Reading Main Data sheet.
+2024-12-11 13:54:23,830 - INFO - Main Data sheet successfully read. Total items: 12
+2024-12-11 13:54:23,831 - INFO - Processing item: XM1014 | Quicksilver (Battle-Scarred)
+2024-12-11 13:54:23,831 - INFO - Checking price for item: XM1014 | Quicksilver (Battle-Scarred)
+2024-12-11 13:54:27,136 - INFO - Price check successful for item: XM1014 | Quicksilver (Battle-Scarred). Prices: ['0,48€', 'Price not available', 'Volume not available']
+2024-12-11 13:54:27,137 - INFO - Processing item: Desert Eagle | Heat Treated (Well-Worn)
+2024-12-11 13:54:27,137 - INFO - Checking price for item: Desert Eagle | Heat Treated (Well-Worn)
+2024-12-11 13:54:30,754 - INFO - Price check successful for item: Desert Eagle | Heat Treated (Well-Worn). Prices: ['2,90€', '2,89€', '225']
+2024-12-11 13:54:30,755 - INFO - Processing item: ★ StatTrak™ Navaja Knife | Damascus Steel (Field-Tested)
+2024-12-11 13:54:30,756 - INFO - Checking price for item: ★ StatTrak™ Navaja Knife | Damascus Steel (Field-Tested)
+2024-12-11 13:54:33,743 - INFO - Price check successful for item: ★ StatTrak™ Navaja Knife | Damascus Steel (Field-Tested). Prices: ['138,76€', 'Price not available', 'Volume not available']
+2024-12-11 13:54:33,744 - INFO - Processing item: P250 | Whiteout (Minimal Wear)
+2024-12-11 13:54:33,745 - INFO - Checking price for item: P250 | Whiteout (Minimal Wear)
+2024-12-11 13:54:36,787 - INFO - Price check successful for item: P250 | Whiteout (Minimal Wear). Prices: ['49,--€', '46,86€', '1']
+2024-12-11 13:54:36,788 - INFO - Processing item: Desert Eagle | Hypnotic (Factory New)
+2024-12-11 13:54:36,789 - INFO - Checking price for item: Desert Eagle | Hypnotic (Factory New)
+2024-12-11 13:54:39,643 - INFO - Price check successful for item: Desert Eagle | Hypnotic (Factory New). Prices: ['116,78€', 'Price not available', 'Volume not available']
+2024-12-11 13:54:39,644 - INFO - Processing item: Desert Eagle | Hypnotic (Factory New)
+2024-12-11 13:54:39,645 - INFO - Checking price for item: Desert Eagle | Hypnotic (Factory New)
+2024-12-11 13:54:43,904 - INFO - Price check successful for item: Desert Eagle | Hypnotic (Factory New). Prices: ['116,78€', 'Price not available', 'Volume not available']
+2024-12-11 13:54:43,905 - INFO - Processing item: SG 553 | Aloha (Field-Tested)
+2024-12-11 13:54:43,905 - INFO - Checking price for item: SG 553 | Aloha (Field-Tested)
+2024-12-11 13:54:46,782 - INFO - Price check successful for item: SG 553 | Aloha (Field-Tested). Prices: ['0,10€', '0,09€', '272']
+2024-12-11 13:54:46,782 - INFO - Processing item: MP9 | Black Sand (Field-Tested)
+2024-12-11 13:54:46,783 - INFO - Checking price for item: MP9 | Black Sand (Field-Tested)
+2024-12-11 13:54:49,691 - INFO - Price check successful for item: MP9 | Black Sand (Field-Tested). Prices: ['0,09€', '0,07€', '243']
+2024-12-11 13:54:49,692 - INFO - Processing item: R8 Revolver | Grip (Field-Tested)
+2024-12-11 13:54:49,693 - INFO - Checking price for item: R8 Revolver | Grip (Field-Tested)
+2024-12-11 13:54:52,733 - INFO - Price check successful for item: R8 Revolver | Grip (Field-Tested). Prices: ['0,10€', '0,10€', '160']
+2024-12-11 13:54:52,734 - INFO - Processing item: XM1014 | Oxide Blaze (Field-Tested)
+2024-12-11 13:54:52,734 - INFO - Checking price for item: XM1014 | Oxide Blaze (Field-Tested)
+2024-12-11 13:54:56,093 - INFO - Price check successful for item: XM1014 | Oxide Blaze (Field-Tested). Prices: ['0,09€', '0,09€', '165']
+2024-12-11 13:54:56,094 - INFO - Processing item: PP-Bizon | Night Riot (Field-Tested)
+2024-12-11 13:54:56,095 - INFO - Checking price for item: PP-Bizon | Night Riot (Field-Tested)
+2024-12-11 13:54:59,122 - INFO - Price check successful for item: PP-Bizon | Night Riot (Field-Tested). Prices: ['0,10€', '0,10€', '279']
+2024-12-11 13:54:59,123 - INFO - Processing item: P2000 | Urban Hazard (Field-Tested)
+2024-12-11 13:54:59,124 - INFO - Checking price for item: P2000 | Urban Hazard (Field-Tested)
+2024-12-11 13:55:01,493 - INFO - Price check successful for item: P2000 | Urban Hazard (Field-Tested). Prices: ['0,09€', '0,10€', '130']
+2024-12-11 13:55:01,494 - INFO - Total processed items: 12
+2024-12-11 13:55:01,504 - INFO - Results saved successfully.
