@@ -7,8 +7,7 @@ import time
 import datetime
 
 #Log Settings
-currentdir = os.getcwd()
-currentdir = currentdir.replace("Scripts", "")
+currentdir = curdir = os.path.dirname(os.path.abspath(__file__))
 
 c = datetime.datetime.now()
 currenttime = c.strftime('%Y-%m-%d %H.%M.%S')
@@ -41,7 +40,8 @@ def get_currency(exceldirectory: str) -> str:
     try:
         logger.info("Reading Currency.")
         df = pd.read_excel(exceldirectory, "Welcome Page")
-        if df.iat[16,6] == None:
+        currency_cell_value = df.loc[16, 'G']
+        if pd.isna(currency_cell_value):
             logger.info(f"Currency successfully read. Currency: {"USD"}")
             return "USD"
         logger.info(f"Currency successfully read. Currency: {df.iat[16,6]}")
@@ -62,8 +62,7 @@ def read_items(exceldirectory: str) -> pd.DataFrame:
         exit(1)
 
 #Fetching price for an item
-def fetch_price(market, GameID, itemname: str,retries: int=2 ,delay: int=2) -> list[str, str, str]:
-    retries = 3
+def fetch_price(market, GameID, itemname: str,retries: int=3 ,delay: int=2) -> list[str, str, str]:
     logger.info(f"Checking price for item: {itemname}")
     for attempt in range(retries):
         try:
