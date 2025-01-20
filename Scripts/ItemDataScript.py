@@ -7,11 +7,11 @@ import time
 import datetime
 
 #Log Settings
-currentdir = curdir = os.path.dirname(os.path.abspath(__file__))
+currentdir = os.getcwd()
+currentdir = currentdir.replace("scripts", "")
 
 c = datetime.datetime.now()
 currenttime = c.strftime('%Y-%m-%d %H.%M.%S')
-
 logdir = os.path.join(currentdir, "Logs", f"ItemDataLog_{currenttime}.log")
 
 logger = logging.getLogger('my_logger')
@@ -40,7 +40,7 @@ def get_currency(exceldirectory: str) -> str:
     try:
         logger.info("Reading Currency.")
         df = pd.read_excel(exceldirectory, "Welcome Page")
-        currency_cell_value = df.loc[16, 'G']
+        currency_cell_value = df.iat[16,6]
         if pd.isna(currency_cell_value):
             logger.info(f"Currency successfully read. Currency: {"USD"}")
             return "USD"
@@ -117,10 +117,10 @@ def main():
     CsID = AppID.CSGO
 
     #executing functions
-    run_py_file(sorting_logs_prices)
     df = read_items(Excelfile_directory)
     results = organizing_data(df, market, CsID)
     saving_to_csv(results,Csvout_directory)
+    run_py_file(sorting_logs_prices)
 
 if __name__ == "__main__":
     main()

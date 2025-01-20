@@ -2,7 +2,8 @@ import os
 import logging
 
 #Log Settings
-currentdir = os.path.dirname(os.path.abspath(__file__))
+currentdir = os.getcwd()
+currentdir = currentdir.replace("scripts", "")
 logdir = os.path.join(currentdir, "Logs")
 loglist = os.listdir(logdir)
 loglist.sort()

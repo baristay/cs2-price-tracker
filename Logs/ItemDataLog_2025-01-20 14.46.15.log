@@ -1,0 +1,35 @@
+2025-01-20 14:46:15,052 - INFO - Starting script...
+2025-01-20 14:46:15,052 - INFO - Reading Currency.
+2025-01-20 14:46:15,331 - INFO - Currency successfully read. Currency: USD
+2025-01-20 14:46:15,410 - INFO - Starting Sorting_Logs_Prices.py Script...
+2025-01-20 14:46:15,411 - INFO - Checking directory count for: Logs.
+2025-01-20 14:46:15,411 - INFO - File count from directory is less than provided exessCount. Exess count: 5, File count: 4
+2025-01-20 14:46:15,411 - INFO - Checking directory count for: Data.
+2025-01-20 14:46:15,412 - INFO - File count from Data directory is greater than provided exessCount. Exess count: 5, File count: 7
+2025-01-20 14:46:15,413 - INFO - price_2024-12-11 14.09.58.csv file is deleted.
+2025-01-20 14:46:15,414 - INFO - price_2025-01-20 14.36.59.csv file is deleted.
+2025-01-20 14:46:15,422 - INFO - Reading Main Data sheet.
+2025-01-20 14:46:15,438 - INFO - Main Data sheet successfully read. Total items: 12
+2025-01-20 14:46:15,439 - INFO - Processing item: XM1014 | Quicksilver (Battle-Scarred)
+2025-01-20 14:46:15,440 - INFO - Checking price for item: XM1014 | Quicksilver (Battle-Scarred)
+2025-01-20 14:46:16,313 - INFO - Price check successful for item: XM1014 | Quicksilver (Battle-Scarred). Prices: ['$0.26', '$0.26', '3']
+2025-01-20 14:46:16,314 - INFO - Processing item: Desert Eagle | Heat Treated (Well-Worn)
+2025-01-20 14:46:16,314 - INFO - Checking price for item: Desert Eagle | Heat Treated (Well-Worn)
+2025-01-20 14:46:17,008 - INFO - Price check successful for item: Desert Eagle | Heat Treated (Well-Worn). Prices: ['$1.67', '$1.68', '768']
+2025-01-20 14:46:17,008 - INFO - Processing item: ★ StatTrak™ Navaja Knife | Damascus Steel (Field-Tested)
+2025-01-20 14:46:17,009 - INFO - Checking price for item: ★ StatTrak™ Navaja Knife | Damascus Steel (Field-Tested)
+2025-01-20 14:46:17,763 - INFO - Price check successful for item: ★ StatTrak™ Navaja Knife | Damascus Steel (Field-Tested). Prices: ['$160.00', '$147.82', '1']
+2025-01-20 14:46:17,764 - INFO - Processing item: P250 | Whiteout (Minimal Wear)
+2025-01-20 14:46:17,764 - INFO - Checking price for item: P250 | Whiteout (Minimal Wear)
+2025-01-20 14:46:18,463 - INFO - Price check successful for item: P250 | Whiteout (Minimal Wear). Prices: ['$47.00', '$46.43', '4']
+2025-01-20 14:46:18,464 - INFO - Processing item: Desert Eagle | Hypnotic (Factory New)
+2025-01-20 14:46:18,464 - INFO - Checking price for item: Desert Eagle | Hypnotic (Factory New)
+2025-01-20 14:46:19,181 - INFO - Price check successful for item: Desert Eagle | Hypnotic (Factory New). Prices: ['$113.87', '$113.86', '2']
+2025-01-20 14:46:19,182 - INFO - Processing item: Desert Eagle | Hypnotic (Factory New)
+2025-01-20 14:46:19,183 - INFO - Checking price for item: Desert Eagle | Hypnotic (Factory New)
+2025-01-20 14:46:19,874 - ERROR - Attempt 1: Error fetching price for item Desert Eagle | Hypnotic (Factory New). Error: 'NoneType' object is not subscriptable
+2025-01-20 14:46:22,569 - INFO - Price check successful for item: Desert Eagle | Hypnotic (Factory New). Prices: ['$113.87', '$113.86', '2']
+2025-01-20 14:46:22,570 - INFO - Processing item: SG 553 | Aloha (Field-Tested)
+2025-01-20 14:46:22,570 - INFO - Checking price for item: SG 553 | Aloha (Field-Tested)
+2025-01-20 14:46:23,224 - ERROR - Attempt 1: Error fetching price for item SG 553 | Aloha (Field-Tested). Error: 'NoneType' object is not subscriptable
+2025-01-20 14:46:25,977 - ERROR - Attempt 2: Error fetching price for item SG 553 | Aloha (Field-Tested). Error: 'NoneType' object is not subscriptable
